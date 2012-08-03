@@ -3,7 +3,7 @@
 # hump'ly ripped from pastegevent 0.1
 
 from gevent import reinit
-from socketio import SocketIOServer
+from socketio.server import SocketIOServer
 from gevent.monkey import patch_all
 
 __all__ = ["server_factory",

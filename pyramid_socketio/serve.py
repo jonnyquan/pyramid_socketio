@@ -9,7 +9,7 @@ import socket
 import sys
 import os
 
-from socketio import SocketIOServer
+from socketio.server import SocketIOServer
 from paste.deploy import loadapp
 
 
