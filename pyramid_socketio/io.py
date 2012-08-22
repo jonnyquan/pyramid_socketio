@@ -2,6 +2,7 @@
 
 import logging
 import gevent
+import sys
 
 __all__ = ['SocketIOError', 'SocketIOContext', 'socketio_manage']
 
@@ -51,7 +52,13 @@ class SocketIOContext(object):
         dispatched.
         """
         self.request = request
-        self.io = request.environ['socketio']
+        print 'io before1'
+        try:
+            self.io = request.environ['socketio']
+        except:
+            print sys.exc_info()[0],sys.exc_info()[1]
+            raise Exception('Error')
+        print 'io finish1'
         if json_dumps:
             self.io.dumps = json_dumps
         if json_loads:
@@ -271,8 +278,9 @@ def socketio_manage(start_context):
     messages for a particular context.
     """
     request = start_context.request
+    print 'io before'
     io = request.environ['socketio']
-
+    print 'io finish'
     if hasattr(start_context, 'connect'):
         getattr(start_context, 'connect')()
 
